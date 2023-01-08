@@ -1,3 +1,10 @@
+[tool.isort]
+profile = "black"
+
+[tool.black]
+line-length = 120
+skip_magic_trailing_comma = true  # For compatibility with pydoc>=4.6, check if still needed.
+
 [tool.poetry]
 name = "embedding-store"
 version = "0.1.0"

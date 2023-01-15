@@ -5,18 +5,14 @@ from typing import List, Optional, Text
 import numpy as np
 import pandas as pd
 
-
-VALID_ROW_ATTRIBUTE = "querytext"
+VALID_ROW_ATTRIBUTE = "sentence"
 VALID_COLUMN_ATTRIBUTE = "embedding"
 
 
 class EmbeddingStore(ABC):
     """Retrieve sentence embeddings."""
 
-    def __init__(
-        self,
-        parquet_file_path: Optional[str] = None,
-    ) -> None:
+    def __init__(self, parquet_file_path: Optional[str] = None) -> None:
         def create_empty_df() -> pd.DataFrame:
             df = pd.DataFrame({VALID_ROW_ATTRIBUTE: [], VALID_COLUMN_ATTRIBUTE: []})
             df.set_index(VALID_ROW_ATTRIBUTE, inplace=True)
@@ -34,36 +30,29 @@ class EmbeddingStore(ABC):
             else:
                 self.cache_df = create_empty_df()
                 self.cache_df.to_parquet(parquet_file_path)
-    
+
     def _column_validation(self, df: pd.DataFrame) -> None:
         if VALID_ROW_ATTRIBUTE != df.index.name:
             raise ValueError(f"Missing row index: {VALID_ROW_ATTRIBUTE}")
         if VALID_COLUMN_ATTRIBUTE not in df.columns:
             raise ValueError(f"Missing column index: {VALID_COLUMN_ATTRIBUTE}")
         if len(df.columns) != 1:
-            raise ValueError(f"Column size should be 1")
-    
+            raise ValueError("Column size should be 1")
+
     def _update_cache_df(self, new_embedding_df: pd.DataFrame) -> None:
         self._column_validation(self.cache_df)
         self._column_validation(new_embedding_df)
         self.cache_df = pd.concat([self.cache_df, new_embedding_df], axis=0)
-        self.cache_df = self.cache_df.loc[~self.cache_df.index.duplicated(keep='last')]
+        self.cache_df = self.cache_df.loc[~self.cache_df.index.duplicated(keep="last")]
 
-    def retrieve_embeddings(
-        self,
-        sentences: List[Text],
-    ) -> np.ndarray:
+    def retrieve_embeddings(self, sentences: List[Text]) -> np.ndarray:
         """Retrieve the sentence embeddings from the cache, if the sentence embedding doesn't
         existed in cache then search result from the model.
         """
 
-        return np.array(
-            self.retrieve_dataframe_embeddings(sentences=sentences)[VALID_COLUMN_ATTRIBUTE].to_list())
+        return np.array(self.retrieve_dataframe_embeddings(sentences=sentences)[VALID_COLUMN_ATTRIBUTE].to_list())
 
-    def retrieve_dataframe_embeddings(
-        self,
-        sentences: List[Text],
-    ) -> pd.DataFrame:
+    def retrieve_dataframe_embeddings(self, sentences: List[Text]) -> pd.DataFrame:
         """Retrieve the sentence embeddings from the cache, if the sentence embedding doesn't
         existed in cache then search result from the model. Return the sentence embeddings
         from the cache, if the sentence embedding doesn't existed in cache then search result from the model.
@@ -74,7 +63,7 @@ class EmbeddingStore(ABC):
         embeddings_df = sentences_df.merge(
             self.cache_df[~self.cache_df.index.duplicated(keep="first")].reset_index(),
             how="left",
-            on=VALID_ROW_ATTRIBUTE
+            on=VALID_ROW_ATTRIBUTE,
         )
         embeddings_df.replace({np.nan: None}, inplace=True)
         embeddings_df.set_index(VALID_ROW_ATTRIBUTE, inplace=True)
@@ -89,7 +78,7 @@ class EmbeddingStore(ABC):
         self._update_cache_df(new_embedding_df=embeddings_df)
 
         return embeddings_df
-    
+
     def save(self, path: Optional[str] = None):
         """Save the cache to parquet."""
 

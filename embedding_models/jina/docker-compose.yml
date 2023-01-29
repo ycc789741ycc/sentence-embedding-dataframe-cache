@@ -1,0 +1,79 @@
+version: '3.3'
+networks:
+  jina-network:
+    driver: bridge
+services:
+  embeddingmodel:
+    image: embedding_model_executor
+    entrypoint:
+    - jina
+    command:
+    - executor
+    - --name
+    - EmbeddingModel
+    - --extra-search-paths
+    - ''
+    - --uses
+    - config.yml
+    - --host
+    - 0.0.0.0
+    - --port
+    - '8081'
+    - --port-monitoring
+    - '63476'
+    - --uses-metas
+    - '{}'
+    - --native
+    - --workspace
+    - /app/.cache/jina
+    healthcheck:
+      test: jina ping executor 127.0.0.1:8081
+      interval: 2s
+    environment:
+    - JINA_LOG_LEVEL=INFO
+    volumes:
+    - /Users/yoshi/.cache/jina:/app
+    - /Users/yoshi/.cache:/root/.cache
+    networks:
+    - jina-network
+  gateway:
+    image: jinaai/jina:3.13.2-py38-standard
+    entrypoint:
+    - jina
+    command:
+    - gateway
+    - --extra-search-paths
+    - ''
+    - --expose-endpoints
+    - '{}'
+    - --protocol
+    - GRPC
+    - HTTP
+    - WEBSOCKET
+    - --uses
+    - CompositeGateway
+    - --graph-description
+    - '{"EmbeddingModel": ["end-gateway"], "start-gateway": ["EmbeddingModel"]}'
+    - --deployments-addresses
+    - '{"EmbeddingModel": ["embeddingmodel:8081"]}'
+    - --port
+    - '54321'
+    - '54322'
+    - '54323'
+    - --port-monitoring
+    - '62112'
+    expose:
+    - 54321
+    - 54322
+    - 54323
+    ports:
+    - 54321:54321
+    - 54322:54322
+    - 54323:54323
+    healthcheck:
+      test: jina ping gateway grpc://127.0.0.1:54321
+      interval: 2s
+    environment:
+    - JINA_LOG_LEVEL=INFO
+    networks:
+    - jina-network

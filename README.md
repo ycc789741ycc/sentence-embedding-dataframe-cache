@@ -1,14 +1,25 @@
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
+## Introduction
 
-# Road Map (Due 1/22)
+## Features
+
+## Get Started
+
+# Road Map
 
 [Done] prototype abstraction
 
 [Todo] Unit-test, integration test
 
-[Todo] Embedding retriever implementation: Pytorch, Clip
+* Start up the service by container api
 
-[Todo] Docker service
+* Jina embedding Test
+
+[Done] Embedding retriever implementation: Pytorch, Jina
+
+[Done] Docker service
 
 [Todo] Example, Documentation
+
+[Todo] Embedding monitor

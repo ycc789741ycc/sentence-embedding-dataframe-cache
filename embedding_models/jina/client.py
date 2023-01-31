@@ -6,3 +6,4 @@ if __name__ == "__main__":
     da.texts = ["hello", "world!!"]
     da_res = jina_client.post("/", da)
     print(da_res.embeddings)
+    print(type(da_res.embeddings))

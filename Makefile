@@ -1,6 +1,8 @@
 help:
 	@echo "    unit-test"
 	@echo "        Test for the embedding store without external dependencies."
+	@echo "    integration-test"
+	@echo "        Test for the embedding store with external dependencies."
 	@echo "    serve-jina-embedding"
 	@echo "        Serve the embedding model base on the jina service."
 	@echo "    stop-jina-embedding"
@@ -14,3 +16,6 @@ stop-jina-embedding:
 
 unit-test:
 	python -m pytest -m unit
+
+integration-test:
+	python -m pytest -m integration

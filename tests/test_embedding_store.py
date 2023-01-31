@@ -1,3 +1,4 @@
+from random import randrange
 from typing import List, Text
 
 import numpy as np
@@ -34,13 +35,15 @@ def test_retrieve_dataframe_embeddings():
     assert results[VALID_COLUMN_ATTRIBUTE].iloc[0].tolist() == np.ones(768).tolist()
 
 
-# @pytest.mark.integration
-# @pytest.mark.parametrize("embedding_store", ["clip_embedding_store"], indirect=True)
-# def test_retrieve_embeddings_from_external_source(embedding_store: EmbeddingStore):
-#     query_sentences = ["播放音樂", "".join([str(randrange(0, 10)) for _ in range(10)]), "我要聽音樂"]
+@pytest.mark.integration
+@pytest.mark.parametrize("embedding_store", ["jira_embedding_store"], indirect=True)
+def test_retrieve_embeddings_from_external_source(embedding_store: EmbeddingStore):
+    query_sentences = ["I want to listen the music.", "".join([str(randrange(0, 10)) for _ in range(10)]), "我要聽音樂"]
 
-#     results = embedding_store.retrieve_dataframe_embeddings(sentences=query_sentences)
+    results = embedding_store.retrieve_embeddings(sentences=query_sentences)
+    assert results.shape[0] == 3
 
-#     assert results.shape == (3, 2)
-#     assert not any(map(lambda x: x is None, results[VALID_ROW_ATTRIBUTE].to_list()))
-#     assert not any(map(lambda x: x is None, results[VALID_COLUMN_ATTRIBUTE].to_list()))
+    results = embedding_store.retrieve_dataframe_embeddings(sentences=query_sentences)
+    assert results.shape == (3, 1)
+    assert not any(map(lambda x: x is None, results.index.to_list()))
+    assert not any(map(lambda x: x is None, results[VALID_COLUMN_ATTRIBUTE].to_list()))

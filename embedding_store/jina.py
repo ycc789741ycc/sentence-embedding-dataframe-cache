@@ -7,16 +7,16 @@ from embedding_store.base import EmbeddingStore
 
 
 class JinaEmbeddingStore(EmbeddingStore):
-    def __init__(self, embedding_grpc: Text, parquet_path: Optional[str] = None, batch_size=100) -> None:
+    def __init__(self, embedding_grpc: Text, cache_path: Optional[str] = None, batch_size=100) -> None:
         """Retrieve the sentence embedding from deployed Jina service, if the cache is existed then return the cache
         results directly
 
         Args:
             embedding_grpc (Text): Jina service grpc.
-            parquet_path (Optional[str], optional): Parquet format cache path. Defaults to None.
+            cache_path (Optional[str], optional): Parquet format cache path. Defaults to None.
             batch_size (int, optional): Maximum size of batch processing from the Jina service. Defaults to 100.
         """
-        super().__init__(parquet_path)
+        super().__init__(cache_path)
         self.embedding_grpc = embedding_grpc
         self.batch_size = batch_size
 

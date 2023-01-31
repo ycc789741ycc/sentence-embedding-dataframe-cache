@@ -12,24 +12,24 @@ VALID_COLUMN_ATTRIBUTE = "embedding"
 class EmbeddingStore(ABC):
     """Retrieve sentence embeddings."""
 
-    def __init__(self, parquet_file_path: Optional[str] = None) -> None:
+    def __init__(self, cache_path: Optional[str] = None) -> None:
         def create_empty_df() -> pd.DataFrame:
             df = pd.DataFrame({VALID_ROW_ATTRIBUTE: [], VALID_COLUMN_ATTRIBUTE: []})
             df.set_index(VALID_ROW_ATTRIBUTE, inplace=True)
 
             return df
 
-        self.parquet_file_path = parquet_file_path
+        self.cache_path = cache_path
 
-        if self.parquet_file_path is None:
+        if self.cache_path is None:
             self.cache_df = create_empty_df()
         else:
-            if os.path.isfile(parquet_file_path):
-                self.cache_df = pd.read_parquet(parquet_file_path)
+            if os.path.isfile(cache_path):
+                self.cache_df = pd.read_parquet(cache_path)
                 self._column_validation(self.cache_df)
             else:
                 self.cache_df = create_empty_df()
-                self.cache_df.to_parquet(parquet_file_path)
+                self.cache_df.to_parquet(cache_path)
 
     def _column_validation(self, df: pd.DataFrame) -> None:
         if VALID_ROW_ATTRIBUTE != df.index.name:
@@ -85,9 +85,9 @@ class EmbeddingStore(ABC):
         if path is not None:
             self.cache_df.to_parquet(path)
         else:
-            if self.parquet_file_path is None:
+            if self.cache_path is None:
                 raise ValueError("Miss the path to save the file!")
-            self.cache_df.to_parquet(self.parquet_file_path)
+            self.cache_df.to_parquet(self.cache_path)
 
     def _get_embeddings_from_cache(self, keys: List[Text]) -> Optional[np.ndarray]:
         """Search the cache result from the cache dataframe.

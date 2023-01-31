@@ -2,24 +2,47 @@
 
 ## Introduction
 
+Implement the sentence embedding retriever with local cache from the embedding store.
+
 ## Features
 
-## Get Started
+* Embedding store abstraction class
+
+* Support Jina client implementation embedding store
+
+## Installation
+
+```bash
+```
+
+## Quick Start
+
+* Using Jina flow serve the embedding model
+
+```python
+```
+
+* Inherit from the abstraction class
+
+```python
+```
 
 # Road Map
 
 [Done] prototype abstraction
 
-[Todo] Unit-test, integration test
+[Done] Unit-test, integration test
 
-* Start up the service by container api
+[Todo] Embedding retriever implementation: Pytorch, Jina
 
-* Jina embedding Test
+* [Done] Jina
 
-[Done] Embedding retriever implementation: Pytorch, Jina
+* [Todo] Sentence Embedding
 
 [Done] Docker service
 
 [Todo] Example, Documentation
 
 [Todo] Embedding monitor
+
+[Improve] Accelerate the Pandas retriever efficiency

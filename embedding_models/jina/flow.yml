@@ -1,0 +1,9 @@
+jtype: Flow
+version: '1'
+gateway:
+  protocol: [grpc, http, websocket]
+  port: [54321, 54322, 54323]
+executors:
+  - uses: docker://embedding_model_executor
+    name: EmbeddingModel
+    replicas: 1

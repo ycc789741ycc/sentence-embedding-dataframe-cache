@@ -6,6 +6,7 @@ import docker
 import pytest
 
 from embedding_store.jina import JinaEmbeddingStore
+from embedding_store.torch import TorchEmbeddingStore
 
 JINA_EMBEDDING_STORE_GRPC = "grpc://0.0.0.0:54321"
 JINA_DOCKER_COMPOSE_FILE = "embedding_models/jina/docker-compose.yml"
@@ -67,6 +68,9 @@ def embedding_store(request):
         with DockerComposeFlow(JINA_DOCKER_COMPOSE_FILE):
             selected_embedding_store = JinaEmbeddingStore(embedding_grpc=JINA_EMBEDDING_STORE_GRPC)
             yield selected_embedding_store
+    elif request.param == "torch_embedding_store":
+        selected_embedding_store = TorchEmbeddingStore()
+        yield selected_embedding_store
 
     else:
         raise ValueError("Not defined embedding store.")

@@ -36,7 +36,7 @@ def test_retrieve_dataframe_embeddings():
 
 
 @pytest.mark.integration
-@pytest.mark.parametrize("embedding_store", ["jira_embedding_store"], indirect=True)
+@pytest.mark.parametrize("embedding_store", ["jira_embedding_store", "torch_embedding_store"], indirect=True)
 def test_retrieve_embeddings_from_external_source(embedding_store: EmbeddingStore):
     query_sentences = ["I want to listen the music.", "".join([str(randrange(0, 10)) for _ in range(10)]), "我要聽音樂"]
 

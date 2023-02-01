@@ -23,7 +23,7 @@ VERSION_FILE_PATH = f"{PACKAGE_NAME}/version.py"
 
 PYPROJECT_FILE_PATH = "pyproject.toml"
 
-REPO_BASE_URL = "https://github.com/ycc789741ycc/sentence-embedding-store"
+REPO_BASE_URL = "https://github.com/ycc789741ycc/sentence-embedding-dataframe-cache"
 
 PRERELEASE_FLAVORS = ("alpha", "rc")
 

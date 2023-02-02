@@ -43,3 +43,4 @@ markers = [
 
 [tool.poetry.extras]
 jina = ["jina"]
+sentence-transformers = ["torch", "sentence-transformers"]

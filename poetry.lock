@@ -833,8 +833,9 @@ files = [
 
 [extras]
 jina = []
+sentence-transformers = []
 
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.9"
-content-hash = "514605bf5ea96f1564fecd3fe6536c931d849e4d1d45e93fadf7877dddb0c60f"
+content-hash = "fe35591ebd6e837da4c4e4b6c9d9fa0a02e52644e93815a1bfb9bf5a21c73da6"

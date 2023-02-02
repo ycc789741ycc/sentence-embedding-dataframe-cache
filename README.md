@@ -87,6 +87,16 @@ class TorchEmbeddingStore(EmbeddingStore):
 
 ### Save the cache
 
+```python
+torch_embedding_store.save("cache.parquet")
+```
+
+### Load from the cache
+
+```python
+torch_embedding_store = TorchEmbeddingStore("cache.parquet")
+
+```
 
 # Road Map
 
@@ -94,11 +104,11 @@ class TorchEmbeddingStore(EmbeddingStore):
 
 [Done] Unit-test, integration test
 
-[Todo] Embedding retriever implementation: Pytorch, Jina
+[Done] Embedding retriever implementation: Pytorch, Jina
 
 * [Done] Jina
 
-* [Todo] Sentence Embedding
+* [Done] Sentence Embedding
 
 [Done] Docker service
 

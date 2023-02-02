@@ -95,7 +95,6 @@ torch_embedding_store.save("cache.parquet")
 
 ```python
 torch_embedding_store = TorchEmbeddingStore("cache.parquet")
-
 ```
 
 # Road Map

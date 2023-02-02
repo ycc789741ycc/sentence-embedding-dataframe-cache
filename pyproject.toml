@@ -17,6 +17,7 @@ packages = [{include = "embedding_store"}]
 python = "^3.9"
 pandas = "^1.5.2"
 numpy = "^1.24.1"
+pyarrow = "^11.0.0"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.2.0"
@@ -42,3 +43,4 @@ markers = [
 
 [tool.poetry.extras]
 jina = ["jina"]
+sentence-transformers = ["torch", "sentence-transformers"]

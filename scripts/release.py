@@ -17,7 +17,7 @@ import toml
 from pep440_version_utils import Version, is_valid_version
 
 # Modify according to package name
-PACKAGE_NAME = "embestore"
+PACKAGE_NAME = "embedding_store"
 
 VERSION_FILE_PATH = f"{PACKAGE_NAME}/version.py"
 

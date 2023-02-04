@@ -289,9 +289,9 @@ def git_tag_and_push_tag(version: Version) -> None:
     check_call(cmd_tag_push)
 
 
-def fix_pre_commit_failure():
+def fix_pre_commit_failure(version: Version) -> None:
     check_call(["git", "add", "setup.py", ".isort.cfg"])
-    check_call(["git", "commit", "-m", "Fix pre-commit failure."])
+    create_commit(version)
 
 
 def main(args: argparse.Namespace) -> None:
@@ -314,7 +314,7 @@ def main(args: argparse.Namespace) -> None:
         try:
             create_commit(version)
         except Exception:
-            fix_pre_commit_failure()
+            fix_pre_commit_failure(version)
         push_changes()
         print_done_message_same_branch(version)
         git_tag_and_push_tag(version)

@@ -311,8 +311,10 @@ def main(args: argparse.Namespace) -> None:
     git_add_files()
 
     if git_current_branch_is_master_or_release():
-        create_commit(version)
-        fix_pre_commit_failure()
+        try:
+            create_commit(version)
+        except Exception:
+            fix_pre_commit_failure()
         push_changes()
         print_done_message_same_branch(version)
         git_tag_and_push_tag(version)

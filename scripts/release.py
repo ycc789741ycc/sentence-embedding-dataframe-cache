@@ -289,6 +289,11 @@ def git_tag_and_push_tag(version: Version) -> None:
     check_call(cmd_tag_push)
 
 
+def fix_pre_commit_failure():
+    git_add_files()
+    check_call(["git", "commit", "-m", "Fix pre-commit failure."])
+
+
 def main(args: argparse.Namespace) -> None:
     """Start a release preparation."""
 
@@ -307,6 +312,7 @@ def main(args: argparse.Namespace) -> None:
 
     if git_current_branch_is_master_or_release():
         create_commit(version)
+        fix_pre_commit_failure()
         push_changes()
         print_done_message_same_branch(version)
         git_tag_and_push_tag(version)

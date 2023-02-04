@@ -23,15 +23,13 @@ integration-test:
 release:
 	PYTHONPATH=. python scripts/release.py
 
-build-and-push-package:
-	$(MAKE) build
-	$(MAKE) publish
-
 build:
 	rm -R -f dist/
 	poetry version $(BUILD_VERSION)
 	poetry build
-	tar -xvf dist/*.tar.gz --wildcards --no-anchored '*/setup.py' --strip=1
+	@if [ "$(shell uname -s)" == "Darwin" ]; then gtar -xvf dist/*.tar.gz --wildcards --no-anchored '*/setup.py' --strip=1;\
+	else tar -xvf dist/*.tar.gz --wildcards --no-anchored '*/setup.py' --strip=1;\
+	fi
 	poetry export -f requirements.txt --output requirements.txt
 
 publish:

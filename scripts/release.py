@@ -290,7 +290,7 @@ def git_tag_and_push_tag(version: Version) -> None:
 
 
 def fix_pre_commit_failure():
-    git_add_files()
+    check_call(["git", "add", "setup.py", ".isort.cfg"])
     check_call(["git", "commit", "-m", "Fix pre-commit failure."])
 
 

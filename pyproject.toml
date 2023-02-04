@@ -4,6 +4,7 @@ profile = "black"
 [tool.black]
 line-length = 120
 skip_magic_trailing_comma = true  # For compatibility with pydoc>=4.6, check if still needed.
+experimental-string-processing = true
 
 [tool.poetry]
 name = "embedding-store"

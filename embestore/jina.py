@@ -3,7 +3,7 @@ from typing import List, Optional, Text
 import numpy as np
 from jina import Client, DocumentArray
 
-from embedding_store.base import EmbeddingStore
+from embestore.base import EmbeddingStore
 
 
 class JinaEmbeddingStore(EmbeddingStore):

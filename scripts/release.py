@@ -17,7 +17,7 @@ import toml
 from pep440_version_utils import Version, is_valid_version
 
 # Modify according to package name
-PACKAGE_NAME = "embedding_store"
+PACKAGE_NAME = "embestore"
 
 VERSION_FILE_PATH = f"{PACKAGE_NAME}/version.py"
 
@@ -68,8 +68,8 @@ def write_version_file(version: Version) -> None:
 
     with version_file_path().open("w") as f:
         f.write(
-            f"# this file will automatically be changed,\n"
-            f"# do not add anything but the version number here!\n"
+            "# this file will automatically be changed,\n"
+            "# do not add anything but the version number here!\n"
             f'__version__ = "{version}"\n'
         )
 
@@ -116,7 +116,7 @@ def confirm_version(version: Version) -> bool:
         confirmed = questionary.confirm(f"Tag with version '{version}' already exists, overwrite?", default=False).ask()
     else:
         confirmed = questionary.confirm(
-            f"Current version is '{get_current_version()}. " f"Is the next version '{version}' correct ?", default=True
+            f"Current version is '{get_current_version()}. Is the next version '{version}' correct ?", default=True
         ).ask()
     if confirmed:
         return True
@@ -135,8 +135,8 @@ def ask_version() -> Text:
     next_micro_version = str(current_version.next_micro())
     next_alpha_version = str(current_version.next_alpha())
     version = questionary.text(
-        f"What is the version number you want to release "
-        f"('major', 'minor', 'micro', 'alpha', 'rc' or valid version number "
+        "What is the version number you want to release "
+        "('major', 'minor', 'micro', 'alpha', 'rc' or valid version number "
         f"e.g. '{next_micro_version}' or '{next_alpha_version}')?",
         validate=is_valid_version_number,
     ).ask()
@@ -298,8 +298,7 @@ def main(args: argparse.Namespace) -> None:
     """Start a release preparation."""
 
     print(
-        "The release script will increase the version number, "
-        "create a changelog and create a release branch. Let's go!"
+        "The release script will increase the version number, create a changelog and create a release branch. Let's go!"
     )
 
     ensure_clean_git()

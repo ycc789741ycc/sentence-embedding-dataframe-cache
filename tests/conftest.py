@@ -5,10 +5,10 @@ from typing import List
 import docker
 import pytest
 
-from embedding_store.jina import JinaEmbeddingStore
-from embedding_store.torch import TorchEmbeddingStore
+from embestore.jina import JinaEmbeddingStore
+from embestore.torch import TorchEmbeddingStore
 
-JINA_EMBEDDING_STORE_GRPC = "grpc://0.0.0.0:54321"
+JINA_embestore_GRPC = "grpc://0.0.0.0:54321"
 JINA_DOCKER_COMPOSE_FILE = "embedding_models/jina/docker-compose.yml"
 
 
@@ -62,15 +62,15 @@ class DockerComposeFlow:
         subprocess.run(f"docker-compose -f {self.dump_path} down --remove-orphans".split(" "))
 
 
-@pytest.fixture(params=["jira_embedding_store"])
-def embedding_store(request):
-    if request.param == "jira_embedding_store":
+@pytest.fixture(params=["jira_embestore"])
+def embestore(request):
+    if request.param == "jira_embestore":
         with DockerComposeFlow(JINA_DOCKER_COMPOSE_FILE):
-            selected_embedding_store = JinaEmbeddingStore(embedding_grpc=JINA_EMBEDDING_STORE_GRPC)
-            yield selected_embedding_store
-    elif request.param == "torch_embedding_store":
-        selected_embedding_store = TorchEmbeddingStore()
-        yield selected_embedding_store
+            selected_embestore = JinaEmbeddingStore(embedding_grpc=JINA_embestore_GRPC)
+            yield selected_embestore
+    elif request.param == "torch_embestore":
+        selected_embestore = TorchEmbeddingStore()
+        yield selected_embestore
 
     else:
         raise ValueError("Not defined embedding store.")

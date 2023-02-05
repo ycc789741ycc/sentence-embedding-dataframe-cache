@@ -38,15 +38,15 @@ make serve-jina-embedding
 * Retrieve the embedding
 
 ```python
-from embedding_store.jina import JinaEmbeddingStore
+from embestore.jina import JinaEmbeddingStore
 
-JINA_EMBEDDING_STORE_GRPC = "grpc://0.0.0.0:54321"
+JINA_embestore_GRPC = "grpc://0.0.0.0:54321"
 
 
 query_sentences = ["I want to listen the music.", "Music don't want to listen me."]
 
-jina_embedding_store = JinaEmbeddingStore(embedding_grpc=JINA_EMBEDDING_STORE_GRPC)
-results = jina_embedding_store.retrieve_embeddings(sentences=query_sentences)
+jina_embestore = JinaEmbeddingStore(embedding_grpc=JINA_embestore_GRPC)
+results = jina_embestore.retrieve_embeddings(sentences=query_sentences)
 ```
 
 * Stop the docker container
@@ -58,13 +58,13 @@ stop-jina-embedding
 ### **Option 2.** Using local sentence embedding model `sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2`
 
 ```python
-from embedding_store.torch import TorchEmbeddingStore
+from embestore.torch import TorchEmbeddingStore
 
 query_sentences = ["I want to listen the music.", "Music don't want to listen me."]
 
 
-torch_embedding_store = TorchEmbeddingStore()
-results = torch_embedding_store.retrieve_embeddings(sentences=query_sentences)
+torch_embestore = TorchEmbeddingStore()
+results = torch_embestore.retrieve_embeddings(sentences=query_sentences)
 ```
 
 ### **Option 3.** Inherit from the abstraction class
@@ -75,7 +75,7 @@ from typing import List, Text
 import numpy as np
 from sentence_transformers import SentenceTransformer
 
-from embedding_store.base import EmbeddingStore
+from embestore.base import EmbeddingStore
 
 model = SentenceTransformer("sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2").eval()
 
@@ -88,13 +88,13 @@ class TorchEmbeddingStore(EmbeddingStore):
 ### Save the cache
 
 ```python
-torch_embedding_store.save("cache.parquet")
+torch_embestore.save("cache.parquet")
 ```
 
 ### Load from the cache
 
 ```python
-torch_embedding_store = TorchEmbeddingStore("cache.parquet")
+torch_embestore = TorchEmbeddingStore("cache.parquet")
 ```
 
 # Road Map

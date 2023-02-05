@@ -12,7 +12,7 @@ version = "0.1.1"
 description = ""
 authors = ["Yoshi Gao <yoshi4868686@gmail.com>"]
 readme = "README.md"
-packages = [{include = "embedding_store"}]
+packages = [{include = "embestore"}]
 
 [tool.poetry.dependencies]
 python = "^3.9"

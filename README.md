@@ -10,18 +10,22 @@ Implement the sentence embedding retriever with local cache from the embedding s
 
 * Support Jina client implementation embedding store
 
+* Support LFU, LRU cache eviction policy for limited cache size, if the eviction policy is not specified then won't
+apply any eviction policy
+
 * Save the cache to parquet file
 
 * Load the cache from existed parquet file
 
-## Installation
-
-```bash
-```
-
 ## Quick Start
 
 ### **Option 1.** Using Jina flow serve the embedding model
+
+* Installation
+
+```bash
+pip install embestore"[jina]"
+```
 
 * To start up the Jina flow service with sentence embedding model
 `sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2`, you can just clone
@@ -55,7 +59,15 @@ results = jina_embestore.retrieve_embeddings(sentences=query_sentences)
 stop-jina-embedding
 ```
 
-### **Option 2.** Using local sentence embedding model `sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2`
+### **Option 2.** Using local sentence embedding model
+
+* Installation
+
+```bash
+pip install embestore"[sentence-transformers]"
+```
+
+* Serve the sentence embedding model `sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2` by in-memory
 
 ```python
 from embestore.store.torch import TorchEmbeddingStore
@@ -68,6 +80,12 @@ results = torch_embestore.retrieve_embeddings(sentences=query_sentences)
 ```
 
 ### **Option 3.** Inherit from the abstraction class
+
+* Installation
+
+```bash
+pip install embestore
+```
 
 ```python
 from typing import List, Text
@@ -97,24 +115,20 @@ torch_embestore.save("cache.parquet")
 torch_embestore = TorchEmbeddingStore("cache.parquet")
 ```
 
+### Apply eviction policy
+
+* LRU
+
+```python
+torch_embestore = TorchEmbeddingStore(max_size=100, eviction_policy="lru")
+```
+
+* LFU
+
+```python
+torch_embestore = TorchEmbeddingStore(max_size=100, eviction_policy="lfu")
+```
+
 # Road Map
 
-[Done] prototype abstraction
-
-[Done] Unit-test, integration test
-
-[Done] Embedding retriever implementation: Pytorch, Jina
-
-* [Done] Jina
-
-* [Done] Sentence Embedding
-
-[Done] Docker service
-
-[Todo] Example, Documentation
-
-[Todo] Embedding monitor
-
-[Todo] pip install support
-
-[Improve] Accelerate the Pandas retriever efficiency
+[Todo] Documentation

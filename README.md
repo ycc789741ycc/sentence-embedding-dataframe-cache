@@ -8,7 +8,7 @@ Implement the sentence embedding retriever with local cache from the embedding s
 
 * Embedding store abstraction class
 
-* Support Jina client implementation embedding store
+* Support [Jina](https://github.com/jina-ai/jina) client implementation embedding store
 
 * Support LFU, LRU cache eviction policy for limited cache size, if the eviction policy is not specified then won't
 apply any eviction policy
@@ -44,13 +44,20 @@ make serve-jina-embedding
 ```python
 from embestore.store.jina import JinaEmbeddingStore
 
-JINA_EMBESTORE_GRPC = "grpc://0.0.0.0:54321"
+JINA_EMBEDDING_STORE_GRPC = "grpc://0.0.0.0:54321"
 
 
 query_sentences = ["I want to listen the music.", "Music don't want to listen me."]
 
-jina_embestore = JinaEmbeddingStore(embedding_grpc=JINA_EMBESTORE_GRPC)
-results = jina_embestore.retrieve_embeddings(sentences=query_sentences)
+jina_embedding_store = JinaEmbeddingStore(embedding_grpc=JINA_EMBEDDING_STORE_GRPC)
+embeddings = jina_embedding_store.retrieve_embeddings(sentences=query_sentences)
+
+>>> embeddings
+array([[ 2.26917475e-01,  8.17841291e-02,  2.35427842e-02,
+        -3.02357599e-02,  1.15757119e-02, -8.42996314e-02,
+         4.42815214e-01,  1.80795133e-01,  1.04702041e-01,
+         ...
+]])
 ```
 
 * Stop the docker container
@@ -75,8 +82,15 @@ from embestore.store.torch import TorchEmbeddingStore
 query_sentences = ["I want to listen the music.", "Music don't want to listen me."]
 
 
-torch_embestore = TorchEmbeddingStore()
-results = torch_embestore.retrieve_embeddings(sentences=query_sentences)
+torch_embedding_store = TorchEmbeddingStore()
+embeddings = torch_embedding_store.retrieve_embeddings(sentences=query_sentences)
+
+>>> embeddings
+array([[ 2.26917475e-01,  8.17841291e-02,  2.35427842e-02,
+        -3.02357599e-02,  1.15757119e-02, -8.42996314e-02,
+         4.42815214e-01,  1.80795133e-01,  1.04702041e-01,
+         ...
+]])
 ```
 
 ### **Option 3.** Inherit from the abstraction class
@@ -106,13 +120,13 @@ class TorchEmbeddingStore(EmbeddingStore):
 ### Save the cache
 
 ```python
-torch_embestore.save("cache.parquet")
+torch_embedding_store.save("cache.parquet")
 ```
 
 ### Load from the cache
 
 ```python
-torch_embestore = TorchEmbeddingStore("cache.parquet")
+torch_embedding_store = TorchEmbeddingStore("cache.parquet")
 ```
 
 ### Apply eviction policy
@@ -120,13 +134,13 @@ torch_embestore = TorchEmbeddingStore("cache.parquet")
 * LRU
 
 ```python
-torch_embestore = TorchEmbeddingStore(max_size=100, eviction_policy="lru")
+torch_embedding_store = TorchEmbeddingStore(max_size=100, eviction_policy="lru")
 ```
 
 * LFU
 
 ```python
-torch_embestore = TorchEmbeddingStore(max_size=100, eviction_policy="lfu")
+torch_embedding_store = TorchEmbeddingStore(max_size=100, eviction_policy="lfu")
 ```
 
 ## Road Map

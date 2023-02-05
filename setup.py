@@ -7,9 +7,14 @@ package_data = {"": ["*"]}
 
 install_requires = ["numpy>=1.24.1,<2.0.0", "pandas>=1.5.2,<2.0.0", "pyarrow>=11.0.0,<12.0.0"]
 
+extras_require = {
+    "jina": ["jina>=3.13.2,<4.0.0"],
+    "sentence-transformers": ["torch>=1.13.1,<2.0.0", "sentence-transformers>=2.2.2,<3.0.0"],
+}
+
 setup_kwargs = {
     "name": "embestore",
-    "version": "0.1.3",
+    "version": "0.1.4",
     "description": "",
     "long_description": (
         "[![Code style:"
@@ -52,6 +57,7 @@ setup_kwargs = {
     "packages": packages,
     "package_data": package_data,
     "install_requires": install_requires,
+    "extras_require": extras_require,
     "python_requires": ">=3.9,<4.0",
 }
 

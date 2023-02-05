@@ -8,7 +8,7 @@ package_data = {"": ["*"]}
 install_requires = ["numpy>=1.24.1,<2.0.0", "pandas>=1.5.2,<2.0.0", "pyarrow>=11.0.0,<12.0.0"]
 
 setup_kwargs = {
-    "name": "embedding-store",
+    "name": "embestore",
     "version": "0.1.2",
     "description": "",
     "long_description": (

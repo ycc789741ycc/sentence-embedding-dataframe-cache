@@ -3,7 +3,7 @@ from typing import List, Text
 import numpy as np
 from sentence_transformers import SentenceTransformer
 
-from embestore.base import EmbeddingStore
+from embestore.store.base import EmbeddingStore
 
 model = SentenceTransformer("sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2").eval()
 

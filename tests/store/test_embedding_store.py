@@ -4,7 +4,7 @@ from typing import List, Text
 import numpy as np
 import pytest
 
-from embestore.base import VALID_COLUMN_ATTRIBUTE, EmbeddingStore
+from embestore.store.base import VALID_COLUMN_ATTRIBUTE, EmbeddingStore
 
 
 class MockEmbeddingStore(EmbeddingStore):

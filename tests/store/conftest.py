@@ -5,8 +5,8 @@ from typing import List
 import docker
 import pytest
 
-from embestore.jina import JinaEmbeddingStore
-from embestore.torch import TorchEmbeddingStore
+from embestore.store.jina import JinaEmbeddingStore
+from embestore.store.torch import TorchEmbeddingStore
 
 JINA_EMBESTORE_GRPC = "grpc://0.0.0.0:54321"
 JINA_DOCKER_COMPOSE_FILE = "embedding_models/jina/docker-compose.yml"

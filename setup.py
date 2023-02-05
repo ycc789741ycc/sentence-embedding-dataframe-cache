@@ -8,8 +8,8 @@ package_data = {"": ["*"]}
 install_requires = ["numpy>=1.24.1,<2.0.0", "pandas>=1.5.2,<2.0.0", "pyarrow>=11.0.0,<12.0.0"]
 
 setup_kwargs = {
-    "name": "embestore",
-    "version": "0.1.1",
+    "name": "embedding-store",
+    "version": "0.1.2",
     "description": "",
     "long_description": (
         "[![Code style:"
@@ -31,10 +31,10 @@ setup_kwargs = {
         " `sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2`\n\n```python\nfrom embestore.torch import"
         ' TorchEmbeddingStore\n\nquery_sentences = ["I want to listen the music.", "Music don\'t want to listen'
         ' me."]\n\n\ntorch_embestore = TorchEmbeddingStore()\nresults ='
-        " torch_embestore.retrieve_embeddings(sentences=query_sentences)\n```\n\n### **Option 3.** Inherit from"
-        " the abstraction class\n\n```python\nfrom typing import List, Text\n\nimport numpy as np\nfrom"
-        " sentence_transformers import SentenceTransformer\n\nfrom embestore.base import EmbeddingStore\n\nmodel"
-        ' = SentenceTransformer("sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2").eval()\n\n\nclass'
+        " torch_embestore.retrieve_embeddings(sentences=query_sentences)\n```\n\n### **Option 3.** Inherit from the"
+        " abstraction class\n\n```python\nfrom typing import List, Text\n\nimport numpy as np\nfrom"
+        " sentence_transformers import SentenceTransformer\n\nfrom embestore.base import EmbeddingStore\n\nmodel ="
+        ' SentenceTransformer("sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2").eval()\n\n\nclass'
         " TorchEmbeddingStore(EmbeddingStore):\n    def _retrieve_embeddings_from_model(self, sentences: List[Text]) ->"
         " np.ndarray:\n        return model.encode(sentences)\n```\n\n### Save the"
         ' cache\n\n```python\ntorch_embestore.save("cache.parquet")\n```\n\n### Load from the'

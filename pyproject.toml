@@ -7,8 +7,8 @@ skip_magic_trailing_comma = true  # For compatibility with pydoc>=4.6, check if 
 experimental-string-processing = true
 
 [tool.poetry]
-name = "embestore"
-version = "0.1.1"
+name = "embedding-store"
+version = "0.1.2"
 description = ""
 authors = ["Yoshi Gao <yoshi4868686@gmail.com>"]
 readme = "README.md"

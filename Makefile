@@ -32,8 +32,8 @@ build:
 	fi
 	poetry export -f requirements.txt --output requirements.txt
 
-publish:
-	poetry publish
+pypi-upload:
+	twine upload dist/*
 
 clean:
 	find . -name '*.pyc' -exec rm -f {} +

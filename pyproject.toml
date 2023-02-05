@@ -8,7 +8,7 @@ experimental-string-processing = true
 
 [tool.poetry]
 name = "embestore"
-version = "0.1.2"
+version = "0.1.3"
 description = ""
 authors = ["Yoshi Gao <yoshi4868686@gmail.com>"]
 readme = "README.md"

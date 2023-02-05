@@ -9,7 +9,7 @@ install_requires = ["numpy>=1.24.1,<2.0.0", "pandas>=1.5.2,<2.0.0", "pyarrow>=11
 
 setup_kwargs = {
     "name": "embestore",
-    "version": "0.1.2",
+    "version": "0.1.3",
     "description": "",
     "long_description": (
         "[![Code style:"

@@ -56,7 +56,7 @@ results = jina_embestore.retrieve_embeddings(sentences=query_sentences)
 * Stop the docker container
 
 ```bash
-stop-jina-embedding
+make stop-jina-embedding
 ```
 
 ### **Option 2.** Using local sentence embedding model
@@ -129,6 +129,8 @@ torch_embestore = TorchEmbeddingStore(max_size=100, eviction_policy="lru")
 torch_embestore = TorchEmbeddingStore(max_size=100, eviction_policy="lfu")
 ```
 
-# Road Map
+## Road Map
 
-[Todo] Documentation
+[TODO] Documentation
+
+[TODO] Badges

@@ -37,7 +37,7 @@ class EmbeddingStore(ABC):
             return df
 
         if eviction_policy is not None:
-            if EvictionPolicy.has_value(eviction_policy):
+            if not EvictionPolicy.has_value(eviction_policy):
                 raise ValueError(
                     "eviction_policy should be within " + ", ".join([policy.value for policy in EvictionPolicy])
                 )
@@ -105,7 +105,7 @@ class EmbeddingStore(ABC):
         self.cache_df = self.cache_df.loc[~self.cache_df.index.duplicated(keep="last")]
 
     def _apply_eviction_policy(self) -> None:
-        if self._eviction_policy is not None and len(self.cache_df > self._max_size):
+        if self._eviction_policy is not None and len(self.cache_df) > self._max_size:
             keeped_size = self.max_size
             if self._eviction_policy == EvictionPolicy.LRU.value:
                 keeped_size = self.max_size

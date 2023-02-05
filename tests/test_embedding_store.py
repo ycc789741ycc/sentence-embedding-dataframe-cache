@@ -35,6 +35,26 @@ def test_retrieve_dataframe_embeddings():
     assert results[VALID_COLUMN_ATTRIBUTE].iloc[0].tolist() == np.ones(768).tolist()
 
 
+@pytest.mark.unit
+def test_cache_with_the_lru_policy():
+    query_sentences = ["I want some dinner", "Bella Chiao", "Hello Work"]
+
+    mock_embestore = MockEmbeddingStore(max_size=2, eviction_policy="lru")
+    _ = mock_embestore.retrieve_dataframe_embeddings(query_sentences)
+
+    assert "I want some dinner" not in mock_embestore.cache_df.index
+
+
+@pytest.mark.unit
+def test_cache_with_the_lfu_policy():
+    query_sentences = ["I want some dinner", "Bella Chiao", "Hello Work", "I want some dinner"]
+
+    mock_embestore = MockEmbeddingStore(max_size=2, eviction_policy="lru")
+    _ = mock_embestore.retrieve_dataframe_embeddings(query_sentences)
+
+    assert "I want some dinner" in mock_embestore.cache_df.index
+
+
 @pytest.mark.integration
 @pytest.mark.parametrize("embestore", ["jira_embestore", "torch_embestore"], indirect=True)
 def test_retrieve_embeddings_from_external_source(embestore: EmbeddingStore):

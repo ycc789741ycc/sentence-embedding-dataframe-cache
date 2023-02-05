@@ -31,7 +31,7 @@ def test_retrieve_dataframe_embeddings():
     mock_embestore = MockEmbeddingStore()
     results = mock_embestore.retrieve_dataframe_embeddings(query_sentences)
 
-    assert results.shape == (2, 1)
+    assert results.shape == (2, 2)
     assert results[VALID_COLUMN_ATTRIBUTE].iloc[0].tolist() == np.ones(768).tolist()
 
 
@@ -44,6 +44,6 @@ def test_retrieve_embeddings_from_external_source(embestore: EmbeddingStore):
     assert results.shape[0] == 3
 
     results = embestore.retrieve_dataframe_embeddings(sentences=query_sentences)
-    assert results.shape == (3, 1)
+    assert results.shape == (3, 2)
     assert not any(map(lambda x: x is None, results.index.to_list()))
     assert not any(map(lambda x: x is None, results[VALID_COLUMN_ATTRIBUTE].to_list()))

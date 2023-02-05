@@ -8,7 +8,7 @@ import pytest
 from embestore.jina import JinaEmbeddingStore
 from embestore.torch import TorchEmbeddingStore
 
-JINA_embestore_GRPC = "grpc://0.0.0.0:54321"
+JINA_EMBESTORE_GRPC = "grpc://0.0.0.0:54321"
 JINA_DOCKER_COMPOSE_FILE = "embedding_models/jina/docker-compose.yml"
 
 
@@ -66,7 +66,7 @@ class DockerComposeFlow:
 def embestore(request):
     if request.param == "jira_embestore":
         with DockerComposeFlow(JINA_DOCKER_COMPOSE_FILE):
-            selected_embestore = JinaEmbeddingStore(embedding_grpc=JINA_embestore_GRPC)
+            selected_embestore = JinaEmbeddingStore(embedding_grpc=JINA_EMBESTORE_GRPC)
             yield selected_embestore
     elif request.param == "torch_embestore":
         selected_embestore = TorchEmbeddingStore()

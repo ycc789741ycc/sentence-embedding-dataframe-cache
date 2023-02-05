@@ -28,9 +28,9 @@ setup_kwargs = {
         " directly and serve by the docker container.\n\n```bash\ngit clone"
         " https://github.com/ycc789741ycc/sentence-embedding-dataframe-cache.git\n\ncd"
         " sentence-embedding-dataframe-cache\n\nmake serve-jina-embedding\n```\n\n* Retrieve the"
-        " embedding\n\n```python\nfrom embestore.jina import JinaEmbeddingStore\n\nJINA_embestore_GRPC ="
+        " embedding\n\n```python\nfrom embestore.jina import JinaEmbeddingStore\n\nJINA_EMBESTORE_GRPC ="
         ' "grpc://0.0.0.0:54321"\n\n\nquery_sentences = ["I want to listen the music.", "Music don\'t want to listen'
-        ' me."]\n\njina_embestore = JinaEmbeddingStore(embedding_grpc=JINA_embestore_GRPC)\nresults ='
+        ' me."]\n\njina_embestore = JinaEmbeddingStore(embedding_grpc=JINA_EMBESTORE_GRPC)\nresults ='
         " jina_embestore.retrieve_embeddings(sentences=query_sentences)\n```\n\n* Stop the docker"
         " container\n\n```bash\nstop-jina-embedding\n```\n\n### **Option 2.** Using local sentence embedding model"
         " `sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2`\n\n```python\nfrom embestore.torch import"

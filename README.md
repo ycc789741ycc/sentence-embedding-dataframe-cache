@@ -40,12 +40,12 @@ make serve-jina-embedding
 ```python
 from embestore.jina import JinaEmbeddingStore
 
-JINA_embestore_GRPC = "grpc://0.0.0.0:54321"
+JINA_EMBESTORE_GRPC = "grpc://0.0.0.0:54321"
 
 
 query_sentences = ["I want to listen the music.", "Music don't want to listen me."]
 
-jina_embestore = JinaEmbeddingStore(embedding_grpc=JINA_embestore_GRPC)
+jina_embestore = JinaEmbeddingStore(embedding_grpc=JINA_EMBESTORE_GRPC)
 results = jina_embestore.retrieve_embeddings(sentences=query_sentences)
 ```
 

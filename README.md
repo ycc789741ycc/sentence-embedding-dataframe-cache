@@ -38,14 +38,14 @@ make serve-jina-embedding
 * Retrieve the embedding
 
 ```python
-from embestore.jina import JinaEmbeddingStore
+from embestore.store.jina import JinaEmbeddingStore
 
-JINA_embestore_GRPC = "grpc://0.0.0.0:54321"
+JINA_EMBESTORE_GRPC = "grpc://0.0.0.0:54321"
 
 
 query_sentences = ["I want to listen the music.", "Music don't want to listen me."]
 
-jina_embestore = JinaEmbeddingStore(embedding_grpc=JINA_embestore_GRPC)
+jina_embestore = JinaEmbeddingStore(embedding_grpc=JINA_EMBESTORE_GRPC)
 results = jina_embestore.retrieve_embeddings(sentences=query_sentences)
 ```
 
@@ -58,7 +58,7 @@ stop-jina-embedding
 ### **Option 2.** Using local sentence embedding model `sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2`
 
 ```python
-from embestore.torch import TorchEmbeddingStore
+from embestore.store.torch import TorchEmbeddingStore
 
 query_sentences = ["I want to listen the music.", "Music don't want to listen me."]
 
@@ -75,7 +75,7 @@ from typing import List, Text
 import numpy as np
 from sentence_transformers import SentenceTransformer
 
-from embestore.base import EmbeddingStore
+from embestore.store.base import EmbeddingStore
 
 model = SentenceTransformer("sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2").eval()
 

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from setuptools import setup
 
-packages = ["embedding_store"]
+packages = ["embestore"]
 
 package_data = {"": ["*"]}
 
@@ -23,22 +23,22 @@ setup_kwargs = {
         " directly and serve by the docker container.\n\n```bash\ngit clone"
         " https://github.com/ycc789741ycc/sentence-embedding-dataframe-cache.git\n\ncd"
         " sentence-embedding-dataframe-cache\n\nmake serve-jina-embedding\n```\n\n* Retrieve the"
-        " embedding\n\n```python\nfrom embedding_store.jina import JinaEmbeddingStore\n\nJINA_EMBEDDING_STORE_GRPC ="
+        " embedding\n\n```python\nfrom embestore.jina import JinaEmbeddingStore\n\nJINA_embestore_GRPC ="
         ' "grpc://0.0.0.0:54321"\n\n\nquery_sentences = ["I want to listen the music.", "Music don\'t want to listen'
-        ' me."]\n\njina_embedding_store = JinaEmbeddingStore(embedding_grpc=JINA_EMBEDDING_STORE_GRPC)\nresults ='
-        " jina_embedding_store.retrieve_embeddings(sentences=query_sentences)\n```\n\n* Stop the docker"
+        ' me."]\n\njina_embestore = JinaEmbeddingStore(embedding_grpc=JINA_embestore_GRPC)\nresults ='
+        " jina_embestore.retrieve_embeddings(sentences=query_sentences)\n```\n\n* Stop the docker"
         " container\n\n```bash\nstop-jina-embedding\n```\n\n### **Option 2.** Using local sentence embedding model"
-        " `sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2`\n\n```python\nfrom embedding_store.torch import"
+        " `sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2`\n\n```python\nfrom embestore.torch import"
         ' TorchEmbeddingStore\n\nquery_sentences = ["I want to listen the music.", "Music don\'t want to listen'
-        ' me."]\n\n\ntorch_embedding_store = TorchEmbeddingStore()\nresults ='
-        " torch_embedding_store.retrieve_embeddings(sentences=query_sentences)\n```\n\n### **Option 3.** Inherit from"
+        ' me."]\n\n\ntorch_embestore = TorchEmbeddingStore()\nresults ='
+        " torch_embestore.retrieve_embeddings(sentences=query_sentences)\n```\n\n### **Option 3.** Inherit from"
         " the abstraction class\n\n```python\nfrom typing import List, Text\n\nimport numpy as np\nfrom"
-        " sentence_transformers import SentenceTransformer\n\nfrom embedding_store.base import EmbeddingStore\n\nmodel"
+        " sentence_transformers import SentenceTransformer\n\nfrom embestore.base import EmbeddingStore\n\nmodel"
         ' = SentenceTransformer("sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2").eval()\n\n\nclass'
         " TorchEmbeddingStore(EmbeddingStore):\n    def _retrieve_embeddings_from_model(self, sentences: List[Text]) ->"
         " np.ndarray:\n        return model.encode(sentences)\n```\n\n### Save the"
-        ' cache\n\n```python\ntorch_embedding_store.save("cache.parquet")\n```\n\n### Load from the'
-        ' cache\n\n```python\ntorch_embedding_store = TorchEmbeddingStore("cache.parquet")\n```\n\n# Road Map\n\n[Done]'
+        ' cache\n\n```python\ntorch_embestore.save("cache.parquet")\n```\n\n### Load from the'
+        ' cache\n\n```python\ntorch_embestore = TorchEmbeddingStore("cache.parquet")\n```\n\n# Road Map\n\n[Done]'
         " prototype abstraction\n\n[Done] Unit-test, integration test\n\n[Done] Embedding retriever implementation:"
         " Pytorch, Jina\n\n* [Done] Jina\n\n* [Done] Sentence Embedding\n\n[Done] Docker service\n\n[Todo] Example,"
         " Documentation\n\n[Todo] Embedding monitor\n\n[Todo] pip install support\n\n[Improve] Accelerate the Pandas"

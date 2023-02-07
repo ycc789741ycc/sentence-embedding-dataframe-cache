@@ -46,3 +46,6 @@ clean:
 	rm -rf docs/.docusaurus
 	rm -rf .pytest_cache/
 	rm -rf ./**/__pycache__/
+
+doc-gen-rst:
+	sphinx-apidoc -o doc/source embestore

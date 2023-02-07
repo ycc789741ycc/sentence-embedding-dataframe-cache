@@ -81,6 +81,12 @@ class EmbeddingStore(ABC):
         """Retrieve the sentence embeddings from the cache, if the sentence embedding doesn't
         existed in cache then search result from the model. Return the sentence embeddings
         from the cache, if the sentence embedding doesn't existed in cache then search result from the model.
+
+        Args:
+            sentences (List[Text]): List of the sentences to embed.
+
+        Returns:
+            pd.DataFrame: The sentences with the embedding vectors formed by data frame.
         """
 
         embeddings_df = self._retrieve_embeddings_from_cache(sentences)

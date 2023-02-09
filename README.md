@@ -27,16 +27,20 @@ apply any eviction policy
 pip install embestore"[jina]"
 ```
 
-* To start up the Jina flow service with sentence embedding model
-`sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2`, you can just clone
-this github repo directly and serve by the docker container.
+* To start up the Jina flow service with default sentence transformer model
+`sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2`
 
 ```bash
-git clone https://github.com/ycc789741ycc/sentence-embedding-dataframe-cache.git
+embestore serve start-jina
+```
 
-cd sentence-embedding-dataframe-cache
+* Use other sentence transformer model from [hugging face](https://huggingface.co/sentence-transformers)
 
-make start-jina-embedding
+```bash
+# Take sentence-transformers/all-MiniLM-L6-v2 for example
+
+export SENTENCE_TRANSFORMER=sentence-transformers/all-MiniLM-L6-v2
+embestore serve start-jina
 ```
 
 * Retrieve the embedding
@@ -63,7 +67,7 @@ array([[ 2.26917475e-01,  8.17841291e-02,  2.35427842e-02,
 * Stop the docker container
 
 ```bash
-make stop-jina-embedding
+embestore serve stop-jina
 ```
 
 ### **Option 2.** Using local sentence embedding model
@@ -144,7 +148,5 @@ torch_embedding_store = TorchEmbeddingStore(max_size=100, eviction_policy="lfu")
 ```
 
 ## Road Map
-
-[TODO] Documentation
 
 [TODO] Badges

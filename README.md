@@ -36,7 +36,7 @@ git clone https://github.com/ycc789741ycc/sentence-embedding-dataframe-cache.git
 
 cd sentence-embedding-dataframe-cache
 
-make serve-jina-embedding
+make start-jina-embedding
 ```
 
 * Retrieve the embedding

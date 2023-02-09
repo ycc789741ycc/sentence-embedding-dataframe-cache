@@ -29,7 +29,7 @@ setup_kwargs = {
         " model\n`sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2`, you can just clone\nthis github repo"
         " directly and serve by the docker container.\n\n```bash\ngit clone"
         " https://github.com/ycc789741ycc/sentence-embedding-dataframe-cache.git\n\ncd"
-        " sentence-embedding-dataframe-cache\n\nmake serve-jina-embedding\n```\n\n* Retrieve the"
+        " sentence-embedding-dataframe-cache\n\nmake start-jina-embedding\n```\n\n* Retrieve the"
         " embedding\n\n```python\nfrom embestore.store.jina import JinaEmbeddingStore\n\nJINA_EMBEDDING_STORE_GRPC ="
         ' "grpc://0.0.0.0:54321"\n\n\nquery_sentences = ["I want to listen the music.", "Music don\'t want to listen'
         ' me."]\n\njina_embedding_store = JinaEmbeddingStore(embedding_grpc=JINA_EMBEDDING_STORE_GRPC)\nembeddings ='

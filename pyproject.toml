@@ -22,6 +22,7 @@ pyarrow = "^11.0.0"
 jina = {version = "^3.13.2", optional = true}
 torch = {version = "^1.13.1", optional = true}
 sentence-transformers = {version = "^2.2.2", optional = true}
+typer = {version = "^0.7.0", extras = ["all"]}
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.2.0"
@@ -48,3 +49,6 @@ markers = [
 [tool.poetry.extras]
 jina = ["jina"]
 sentence-transformers = ["torch", "sentence-transformers"]
+
+[tool.poetry.scripts]
+embestore = "embestore.cli.main:app"

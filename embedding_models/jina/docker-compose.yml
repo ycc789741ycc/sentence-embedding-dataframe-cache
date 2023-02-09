@@ -5,6 +5,9 @@ networks:
 services:
   embeddingmodel:
     image: embedding_model_executor
+    build:
+      context: ./executor/.
+      dockerfile: Dockerfile
     entrypoint:
     - jina
     command:
@@ -31,9 +34,10 @@ services:
       interval: 2s
     environment:
     - JINA_LOG_LEVEL=INFO
+    - SENTENCE_TRANSFORMER=${SENTENCE_TRANSFORMER:-sentence-transformers/all-MiniLM-L6-v2}
     volumes:
-    - /Users/yoshi/.cache/jina:/app
-    - /Users/yoshi/.cache:/root/.cache
+    - ${HOME}/.cache/jina:/app
+    - ${HOME}/.cache:/root/.cache
     networks:
     - jina-network
   gateway:

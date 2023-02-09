@@ -7,3 +7,6 @@ if __name__ == "__main__":
     da_res = jina_client.post("/", da)
     print(da_res.embeddings)
     print(type(da_res.embeddings))
+
+    da_res = jina_client.post("/current_model")
+    print(da_res.texts)

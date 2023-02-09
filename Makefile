@@ -3,12 +3,12 @@ help:
 	@echo "        Test for the embedding store without external dependencies."
 	@echo "    integration-test"
 	@echo "        Test for the embedding store with external dependencies."
-	@echo "    serve-jina-embedding"
+	@echo "    start-jina-embedding"
 	@echo "        Serve the embedding model base on the jina service."
 	@echo "    stop-jina-embedding"
 	@echo "        Stop the embedding model base on the jina service."
 
-serve-jina-embedding:
+start-jina-embedding:
 	docker-compose -f embedding_models/jina/docker-compose.yml up -d
 
 stop-jina-embedding:

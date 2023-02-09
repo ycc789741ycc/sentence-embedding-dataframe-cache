@@ -34,7 +34,7 @@ services:
       interval: 2s
     environment:
     - JINA_LOG_LEVEL=INFO
-    - SENTENCE_TRANSFORMER=${SENTENCE_TRANSFORMER:-sentence-transformers/all-MiniLM-L6-v2}
+    - SENTENCE_TRANSFORMER=${SENTENCE_TRANSFORMER:-sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2}
     volumes:
     - ${HOME}/.cache/jina:/app
     - ${HOME}/.cache:/root/.cache

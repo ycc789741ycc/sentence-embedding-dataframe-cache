@@ -19,6 +19,12 @@ apply any eviction policy
 
 ## Quick Start
 
+### Environment
+
+* Python 3.9
+
+* Linux/MacOS
+
 ### **Option 1.** Using Jina flow serve the embedding model
 
 * Installation

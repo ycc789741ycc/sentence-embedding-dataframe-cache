@@ -21,7 +21,7 @@ entry_points = {"console_scripts": ["embestore = embestore.cli.main:app"]}
 
 setup_kwargs = {
     "name": "embestore",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "",
     "long_description": (
         "[![Code style:"

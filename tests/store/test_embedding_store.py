@@ -60,10 +60,18 @@ def test_cache_with_the_lfu_policy():
 def test_retrieve_embeddings_from_external_source(embestore: EmbeddingStore):
     query_sentences = ["I want to listen the music.", "".join([str(randrange(0, 10)) for _ in range(10)]), "我要聽音樂"]
 
+    # Number of sentences should be equal to the number of embeddings
     results = embestore.retrieve_embeddings(sentences=query_sentences)
     assert results.shape[0] == 3
 
+    # The embeddings should not be None
     results = embestore.retrieve_dataframe_embeddings(sentences=query_sentences)
+    embeddings = results[VALID_COLUMN_ATTRIBUTE].to_list()
     assert results.shape == (3, 2)
     assert not any(map(lambda x: x is None, results.index.to_list()))
-    assert not any(map(lambda x: x is None, results[VALID_COLUMN_ATTRIBUTE].to_list()))
+    assert not any(map(lambda x: x is None, embeddings))
+
+    # The embeddings should be unique
+    for i in range(len(embeddings)-1):
+        for j in range(i+1, len(embeddings)):
+            assert np.all(embeddings[i] != embeddings[j])

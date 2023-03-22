@@ -31,6 +31,7 @@ class JinaEmbeddingStore(EmbeddingStore):
 
         if len(sentences) > 0:
             document_array = DocumentArray().empty(len(sentences))
+            document_array.texts = sentences
             embedding_results = jina_client.post("/", document_array).embeddings
 
         return embedding_results
